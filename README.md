@@ -7,6 +7,10 @@ And the only things you need are [nodejs](https://nodejs.org/en/download), [Disc
 (and optionally [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git))
 
 
+<img src="https://github.com/user-attachments/assets/adb149d1-6be0-4cf4-8d20-1c0641dc038b" width=40%>
+<img src="https://github.com/user-attachments/assets/8850a9fb-9ab4-4033-8c93-32faed793dd4" width=40%>
+
+
 # Installation
 
 Before we begin you should create a new private discord Server for usage and a discord bot on the [Developer Portal](https://discord.com/developers/applications)
