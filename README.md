@@ -30,19 +30,12 @@ After installing the dependencies, you have to fill out the ``config.json`` file
 Example:
 
     {
-    
     "token":  "NjYwOTA0MTQzNDU5NzEzMDU2.X9O2_g.ZD4DacsvTl9jH3VI3pNzDeocsHk",
-    
     "guild":  "788856277223735296",
-    
     "groupcategory":  "858001700215455764",
-    
     "privatecategory":  "799994116519624704",
-    
     "discordaccountid":  "518112276788543539",
-    
     "sendaudioasvoice":  true
-    
     }
 The token field requires your bots token.
 The guild field requires the id of the discord Server you want to do this in
