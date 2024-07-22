@@ -55,3 +55,34 @@ Open WhatsApp on your main phone and go into the add new device menu and scan th
 
 Now everytime someone messages you a new channel that is synced to that contact will be created.
 You can now just type into the chat or send pictures or audios to chat with the person.
+
+# Features
+|Features  | status |
+|--|--|
+| images | ✅ |
+| audios | ✅ |
+| videos | ✅ |
+| documents/other | ✅ |
+| stickers | ✅ |
+| view once Images | ✅ |
+| view once Videos | ✅ |
+| view once Audios | ✅ |
+| replies | ❌ |
+| status | ❌ |
+| profile controls | ❌ |
+
+You can normally send images, audio, video and other files between discord and WhatsApp.
+There can be problems if the file size is too big, but normally you shouldn't have any issues.
+
+Stickers are sent to discord as normal image files, and animated stickers aren't animated.
+I'll maybe try to fix this in the future.
+Stickers from discord on the other hand will be sent to WhatsApp as actual Stickers.
+
+For send any type of media as only viewable once, you can just mark the file as a spoiler inside discord, and it will be sent as view once media on discord.
+
+Replies don't work at this time, and I'll maybe implement the function to read replies inside of discord. 
+But writing replies inside of discord would require me to save every message into the database, and that isn't exactly a great idea to do with a SQLite database.
+
+I don't really want to implement viewing someone's status inside of discord because that is not really something that is necessary to do inside of discord, but if I get feedback that says this feature is actually wanted, I would implement it.
+
+I am playing with the thought of adding some controls about the WhatsApp profile, like changing the profile picture for example, but I don't really know if that is something that you need to do in discord and actually useful.
