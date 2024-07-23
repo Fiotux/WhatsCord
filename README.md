@@ -38,10 +38,15 @@ Example:
     "sendaudioasvoice":  true
     }
 The token field requires your bots token.
+
 The guild field requires the id of the discord Server you want to do this in
+
 The privatecategory field requires the id of the channel category for your private chats
+
 The groupcategory field requires the id of the channel category for your group chats
+
 The discordaccountid field requires the id of your discord account
+
 The sendaudioasvoice field requires either false or true if you want to send audio files as a normal audio file or as a voice message on WhatsApp
 
 After that you can start the Skript
