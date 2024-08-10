@@ -164,11 +164,15 @@ ${dateTimeString} ${contact.name}: ${msg.body}`, err => {
                 embed = new EmbedBuilder()
                     .setColor(5763719)
                     .setDescription(`${msg.body}`)
-                webhookClient.send({
+                    const hookmessage = await webhookClient.send({
                     avatarURL: pp,
                     username: `${contact.name}`,
                     embeds: [embed],
                 }).catch(console.error);
+                Messages.create({
+                    wid: `${msg.id._serialized}`,
+                    did: `${hookmessage.id}`
+                  });
             } else {
 
 
@@ -202,12 +206,16 @@ ${dateTimeString} ${contact.name}: ${msg.body}`, err => {
                     } else {
                         file = new AttachmentBuilder(decodedData).setName(media.filename);
                     }
-                    webhookClient.send({
+                    const hookmessage = await webhookClient.send({
                         avatarURL: pp,
                         username: `${contact.name}`,
                         embeds: [embed],
                         files: [file],
                     }).catch(console.error);
+                    Messages.create({
+                        wid: `${msg.id._serialized}`,
+                        did: `${hookmessage.id}`
+                      });
 
 
                 })
@@ -219,11 +227,15 @@ ${dateTimeString} ${contact.name}: ${msg.body}`, err => {
                 embed = new EmbedBuilder()
                     .setColor(5763719)
                     .setDescription(`${msg.body}`)
-                webhookClient.send({
+                    const hookmessage = await webhookClient.send({
                     avatarURL: pp,
                     username: `${contact.pushname}`,
                     embeds: [embed],
                 }).catch(console.error);
+                Messages.create({
+                    wid: `${msg.id._serialized}`,
+                    did: `${hookmessage.id}`
+                  });
             } else {
 
 
@@ -257,12 +269,16 @@ ${dateTimeString} ${contact.name}: ${msg.body}`, err => {
                     } else {
                         file = new AttachmentBuilder(decodedData).setName(media.filename);
                     }
-                    webhookClient.send({
+                    const hookmessage = await webhookClient.send({
                         avatarURL: pp,
                         username: `${contact.pushname}`,
                         embeds: [embed],
                         files: [file],
                     }).catch(console.error);
+                    Messages.create({
+                        wid: `${msg.id._serialized}`,
+                        did: `${hookmessage.id}`
+                      });
 
 
                 })
@@ -287,28 +303,60 @@ bot.on('messageCreate', msg => {
         }
 
         if (msg.attachments.first()) {
+            if(msg.content == "") {
+                const wamsg = await client.sendMessage(`${data.author}`, MessageMedia.fromUrl(msg.attachments.first().url))
+                await Messages.create({
+                  wid: `${wamsg.id._serialized}`,
+                  did: `${msg.id}`
+                });
+                return;
+              }
             const media = await MessageMedia.fromUrl(msg.attachments.first().url).catch(
                 client.sendMessage(`${data.author}`, MessageMedia.fromUrl(msg.attachments.first().url))
             );
             if (msg.content) {
                 if (msg.attachments.first().url.includes('SPOILER_')) {
-                    client.sendMessage(`${data.author}`, msg.content, { sendAudioAsVoice: config.sendaudioasvoice, media: media, isViewOnce: true });
+                    const wamsg = await client.sendMessage(`${data.author}`, msg.content, { sendAudioAsVoice: config.sendaudioasvoice, media: media, isViewOnce: true });
+                    await Messages.create({
+                        wid: `${wamsg.id._serialized}`,
+                        did: `${msg.id}`
+                      });
                 } else {
-                    client.sendMessage(`${data.author}`, msg.content, { sendAudioAsVoice: config.sendaudioasvoice, media: media });
+                    const wamsg = await client.sendMessage(`${data.author}`, msg.content, { sendAudioAsVoice: config.sendaudioasvoice, media: media });
+                    await Messages.create({
+                        wid: `${wamsg.id._serialized}`,
+                        did: `${msg.id}`
+                      });
                 }
             } else {
                 if (msg.attachments.first().url.includes('SPOILER_')) {
-                    client.sendMessage(`${data.author}`, media, { sendAudioAsVoice: config.sendaudioasvoice, isViewOnce: true });
+                    const wamsg = await client.sendMessage(`${data.author}`, media, { sendAudioAsVoice: config.sendaudioasvoice, isViewOnce: true });
+                    await Messages.create({
+                        wid: `${wamsg.id._serialized}`,
+                        did: `${msg.id}`
+                      });
                 } else {
-                    client.sendMessage(`${data.author}`, media, { sendAudioAsVoice: config.sendaudioasvoice });
+                    const wamsg = await client.sendMessage(`${data.author}`, media, { sendAudioAsVoice: config.sendaudioasvoice });
+                    await Messages.create({
+                        wid: `${wamsg.id._serialized}`,
+                        did: `${msg.id}`
+                      });
                 }
             }
         } else if (msg.stickers.first()) {
             const media = await MessageMedia.fromUrl(msg.stickers.first().url);
-            client.sendMessage(`${data.author}`, media, { sendMediaAsSticker: true });
+            const wamsg = await client.sendMessage(`${data.author}`, media, { sendMediaAsSticker: true });
+            await Messages.create({
+                wid: `${wamsg.id._serialized}`,
+                did: `${msg.id}`
+              });
 
         } else {
-            client.sendMessage(`${data.author}`, msg.content);
+            const wamsg = await client.sendMessage(`${data.author}`, msg.content);
+            await Messages.create({
+                wid: `${wamsg.id._serialized}`,
+                did: `${msg.id}`
+              });
         }
 
 
