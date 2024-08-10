@@ -82,7 +82,7 @@ Stickers from discord on the other hand will be sent to WhatsApp as actual Stick
 
 For send any type of media as only viewable once, you can just mark the file as a spoiler inside discord, and it will be sent as view once media on discord.
 
-Replies don't work at this time, and I'll maybe implement the function to read replies inside of discord. 
+Replies don't work at this time, and I'll implement the feature to read replies inside of discord. 
 But writing replies inside of discord would require me to save every message into the database, and that isn't exactly a great idea to do with a SQLite database.
 
 I don't really want to implement viewing someone's status inside of discord because that is not really something that is necessary to do inside of discord, but if I get feedback that says this feature is actually wanted, I would implement it.
