@@ -58,7 +58,10 @@ const Messages = sequelize.define('Messages', {
     did: {
         type: DataTypes.STRING,
         allowNull: false
-    }
+    },
+    channel: {
+        type: DataTypes.STRING,
+        allowNull: false
   });
 
 function getHumanReadableDateTime() {
@@ -171,7 +174,8 @@ ${dateTimeString} ${contact.name}: ${msg.body}`, err => {
                 }).catch(console.error);
                 Messages.create({
                     wid: `${msg.id._serialized}`,
-                    did: `${hookmessage.id}`
+                    did: `${hookmessage.id}`,
+                    channel: `${hookmessage.channelId}`
                   });
             } else {
 
@@ -214,7 +218,8 @@ ${dateTimeString} ${contact.name}: ${msg.body}`, err => {
                     }).catch(console.error);
                     Messages.create({
                         wid: `${msg.id._serialized}`,
-                        did: `${hookmessage.id}`
+                        did: `${hookmessage.id}`,
+                        channel: `${hookmessage.channelId}`
                       });
 
 
@@ -234,7 +239,8 @@ ${dateTimeString} ${contact.name}: ${msg.body}`, err => {
                 }).catch(console.error);
                 Messages.create({
                     wid: `${msg.id._serialized}`,
-                    did: `${hookmessage.id}`
+                    did: `${hookmessage.id}`,
+                    channel: `${hookmessage.channelId}`
                   });
             } else {
 
@@ -277,7 +283,8 @@ ${dateTimeString} ${contact.name}: ${msg.body}`, err => {
                     }).catch(console.error);
                     Messages.create({
                         wid: `${msg.id._serialized}`,
-                        did: `${hookmessage.id}`
+                        did: `${hookmessage.id}`,
+                        channel: `${hookmessage.channelId}`
                       });
 
 
@@ -306,8 +313,9 @@ bot.on('messageCreate', msg => {
             if(msg.content == "") {
                 const wamsg = await client.sendMessage(`${data.author}`, MessageMedia.fromUrl(msg.attachments.first().url))
                 await Messages.create({
-                  wid: `${wamsg.id._serialized}`,
-                  did: `${msg.id}`
+                    wid: `${wamsg.id._serialized}`,
+                    did: `${msg.id}`,
+                    channel: `${msg.channel.id}`
                 });
                 return;
               }
@@ -319,13 +327,15 @@ bot.on('messageCreate', msg => {
                     const wamsg = await client.sendMessage(`${data.author}`, msg.content, { sendAudioAsVoice: config.sendaudioasvoice, media: media, isViewOnce: true });
                     await Messages.create({
                         wid: `${wamsg.id._serialized}`,
-                        did: `${msg.id}`
+                        did: `${msg.id}`,
+                        channel: `${msg.channel.id}`
                       });
                 } else {
                     const wamsg = await client.sendMessage(`${data.author}`, msg.content, { sendAudioAsVoice: config.sendaudioasvoice, media: media });
                     await Messages.create({
                         wid: `${wamsg.id._serialized}`,
-                        did: `${msg.id}`
+                        did: `${msg.id}`,
+                        channel: `${msg.channel.id}`
                       });
                 }
             } else {
@@ -333,13 +343,15 @@ bot.on('messageCreate', msg => {
                     const wamsg = await client.sendMessage(`${data.author}`, media, { sendAudioAsVoice: config.sendaudioasvoice, isViewOnce: true });
                     await Messages.create({
                         wid: `${wamsg.id._serialized}`,
-                        did: `${msg.id}`
+                        did: `${msg.id}`,
+                        channel: `${msg.channel.id}`
                       });
                 } else {
                     const wamsg = await client.sendMessage(`${data.author}`, media, { sendAudioAsVoice: config.sendaudioasvoice });
                     await Messages.create({
                         wid: `${wamsg.id._serialized}`,
-                        did: `${msg.id}`
+                        did: `${msg.id}`,
+                        channel: `${msg.channel.id}`
                       });
                 }
             }
@@ -348,14 +360,16 @@ bot.on('messageCreate', msg => {
             const wamsg = await client.sendMessage(`${data.author}`, media, { sendMediaAsSticker: true });
             await Messages.create({
                 wid: `${wamsg.id._serialized}`,
-                did: `${msg.id}`
+                did: `${msg.id}`,
+                channel: `${msg.channel.id}`
               });
 
         } else {
             const wamsg = await client.sendMessage(`${data.author}`, msg.content);
             await Messages.create({
                 wid: `${wamsg.id._serialized}`,
-                did: `${msg.id}`
+                did: `${msg.id}`,
+                channel: `${msg.channel.id}`
               });
         }
 
