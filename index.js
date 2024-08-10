@@ -371,6 +371,14 @@ bot.on('messageDelete', msg => {
     wamsg.delete(true);
   })();
 });
+bot.on('messageUpdate', (oldMessage, newMessage) => {
+  (async () => {
+    const data = await Messages.findOne({ where: { did: `${newMessage.id}` } });
+    if (!data) return;
+    const wamsg = await client.getMessageById(data.wid);
+    wamsg.edit(`${newMessage.content}`);
+  })();
+});
 
 client.initialize();
 sequelize.sync();
