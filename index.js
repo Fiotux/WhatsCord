@@ -175,7 +175,7 @@ ${dateTimeString} ${contact.name}: ${msg.body}`, err => {
                 Messages.create({
                     wid: `${msg.id._serialized}`,
                     did: `${hookmessage.id}`,
-                    channel: `${hookmessage.channelId}`
+                    channel: `${hookmessage.channel_id}`
                   });
             } else {
 
@@ -219,7 +219,7 @@ ${dateTimeString} ${contact.name}: ${msg.body}`, err => {
                     Messages.create({
                         wid: `${msg.id._serialized}`,
                         did: `${hookmessage.id}`,
-                        channel: `${hookmessage.channelId}`
+                        channel: `${hookmessage.channel_id}`
                       });
 
 
@@ -240,7 +240,7 @@ ${dateTimeString} ${contact.name}: ${msg.body}`, err => {
                 Messages.create({
                     wid: `${msg.id._serialized}`,
                     did: `${hookmessage.id}`,
-                    channel: `${hookmessage.channelId}`
+                    channel: `${hookmessage.channel_id}`
                   });
             } else {
 
@@ -284,7 +284,7 @@ ${dateTimeString} ${contact.name}: ${msg.body}`, err => {
                     Messages.create({
                         wid: `${msg.id._serialized}`,
                         did: `${hookmessage.id}`,
-                        channel: `${hookmessage.channelId}`
+                        channel: `${hookmessage.channel_id}`
                       });
 
 
