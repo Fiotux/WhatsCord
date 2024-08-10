@@ -369,6 +369,7 @@ bot.on('messageDelete', msg => {
     if (!data) return;
     const wamsg = await client.getMessageById(data.wid);
     wamsg.delete(true);
+    data.destroy();
   })();
 });
 bot.on('messageUpdate', (oldMessage, newMessage) => {
