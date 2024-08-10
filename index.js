@@ -50,6 +50,17 @@ const Group = sequelize.define('Group', {
 
 });
 
+const Messages = sequelize.define('Messages', {
+    wid: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    did: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
+  });
+
 function getHumanReadableDateTime() {
     const date = new Date();
     const year = date.getFullYear();
