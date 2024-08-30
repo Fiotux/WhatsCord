@@ -164,9 +164,12 @@ ${dateTimeString} ${contact.name}: ${msg.body}`, err => {
     )
 //webhook part
 if(msg.hasQuotedMsg) {
-  const quotedMsg = await msg.getQuotedMessage();
+  const quotedMsg = await msg.getQuotedMessage().catch(console.error);
+  if (!quotedMsg) return;
   const quoteddata = await Messages.findOne({ where: { wid: `${quotedMsg.id._serialized}` } });
+  if (!quoteddata) return;
   const discordreply = await bot.channels.fetch(`${data.channel}`).then(channel => channel.messages.fetch(`${quoteddata.did}`));
+
   if (contact.name) {
       if (!msg.hasMedia && msg.body) {
         const webhookClient = new WebhookClient({ url: `${data.webhook}` });
@@ -622,6 +625,7 @@ client.on('message_edit', (msg, newBody) => {
       webhookClient.editMessage(fetchedMessage, {embeds: [embed]});
     } else {
       const hookdata = await User.findOne({ where: { channel: `${data.channel}` } });
+      if(!hookdata) return;
       const hook = await hookdata.webhook;
       const webhookClient = new WebhookClient({ url: `${hook}` });
       webhookClient.editMessage(fetchedMessage, {embeds: [embed]});
